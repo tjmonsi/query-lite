@@ -1,52 +1,54 @@
+/// <reference path="typings-project/global.d.ts"/>
+
 class QueryLite extends window.HTMLElement {
   static get is () { return 'query-lite'; }
-  
+
   constructor () {
     super();
     this.__data = {};
   }
-  
+
   set query (query) {
     this.__data.query = query;
     this._queryChanged(query);
   }
-  
+
   get query () {
     return this.__data.query;
   }
-  
+
   set queryObject (queryObject) {
     this.__data.queryObject = queryObject;
     this._queryObjectChanged(queryObject);
   }
-  
+
   get queryObject () {
     return this.__data.queryObject;
   }
-  
+
   connectedCallback () {
     // initialize values
     this.queryObject = {};
     this._dontReact = false;
   }
-  
+
   _queryChanged (query) {
     this._dontReact = true;
     this.queryObject = this.decodeParams(query);
-    this.dispatchEvent(new window.CustomEvent('query-lite-query-change', { detail: this.queryObject }));
+    this.dispatchEvent(new window.CustomEvent('query-object-change', { detail: this.queryObject }));
     this._dontReact = false;
   }
-  
+
   _queryObjectChanged (queryObject) {
     if (this._dontReact) {
       return;
     }
-    this.query = this._encodeParams(queryObject)
+    this.query = this.encodeParams(queryObject)
       .replace(/%3F/g, '?')
       .replace(/%2F/g, '/')
       .replace(/'/g, '%27');
   }
-  
+
   encodeParams (params) {
     var encodedParams = [];
     for (var key in params) {
@@ -59,7 +61,7 @@ class QueryLite extends window.HTMLElement {
     }
     return encodedParams.join('&');
   }
-  
+
   decodeParams (paramString) {
     const params = {};
     // Work around a bug in decodeURIComponent where + is not
