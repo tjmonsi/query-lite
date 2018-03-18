@@ -27,7 +27,6 @@ class QueryLite extends window.HTMLElement {
   }
 
   connectedCallback () {
-    // initialize values
     this.queryObject = {};
     this._dontReact = false;
   }
@@ -47,6 +46,8 @@ class QueryLite extends window.HTMLElement {
       .replace(/%3F/g, '?')
       .replace(/%2F/g, '/')
       .replace(/'/g, '%27');
+
+    this.dispatchEvent(new window.CustomEvent('query-change', { detail: this.query }));
   }
 
   encodeParams (params) {

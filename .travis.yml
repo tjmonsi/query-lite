@@ -1,0 +1,20 @@
+sudo: required
+addons:
+  sauce_connect: true
+  firefox: latest
+  chrome: stable
+language: node_js
+node_js:
+- 8.9.4
+before_install:
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+script: npm test && npm run wct-sauce
+branches:
+  only:
+  - master
+  - develop
+env:
+  global:
+  - secure: oSntNHzO/Q+4Xf4H+lFEPZHjWt0QLjS1VCEHYYzuWVQaxO5xzC+ucSG8T4RJkGEaEGn3QA5qOUjcxBmCHGIHcc7I8PhUEmM79bGlAVOxvxPG6D/Rf55sLeXq34UbtQ37Fr2i0Bu0HpTe/zIWiFi6VWo2aKBLYa3YqCZcHpOqVfIqwVJTFJLzvD1X2IAReCoMy5OxShT1OOxXwweS/ERlx0Oc8i95U4IZYjCtc/cOik0YC+B/hYVpLmD4CI8MPa7vbbNNjr5TipSXmEiJORfImYzuqX43nldZV40MdloXdge/vnNo+ZCUp8cmggNbN9WNwToIZ+HJ6ep9lFpuR0GiXUZ53Kh0X35sp+jD0E/WKNdz3PNvl7/TIfWy+hkS7VDm9yj5nvr50oNDSSKfU57EYdRyY2iB1PMTO+q7juV3HNavNpceQPOC0ZZAVnsY6wIS9tk9ZKLpn3own1TPZCTpkSgGkE+80hXOhJ67k8W29wqeZvFLJYReIHcTpmR4sE9m2e84Co1eXQwIyM15LejGsBnBLFuz2M3clrdjFlcTH6vKpqop5AcmEY14sWZO2jNN7eUUOs1/Dlv7yAvbPaDWmLh1aGvX0W8+RRrq7IcuKSkhdzuaSBy1c40pdkGNy2w9zWWcDCmPwmMAzh5852NB1OS1bemZ1hROS6oSxitOjBI=
+  - secure: Aj+6T9Lb3p4ikeZ/3FTgZjRORFEt857NTRB6kWBdnQwex6yBNfu7JIyIieUJKMjncQY2HkSBplRW3jczMGX05NOjj6gLfyQBze5CpVVWbS1kIjBgM9h+IFf7glgsyctTSxc9zW/3Bke3//kq/ANVoh/T+L8mkm76uVJFzsy0IzribRT/eflGpYpRcUEFoVwbimW/Y/Iq6m6FI2Rl2GI4910jyXbCRFK6zsSo61EOgbUrZt9xABnlJw5pJGl8UKOvkc4X92skfeN+m/qpHfQs61ABrCX6H01Xry51JrlEZK7Bh4gpTb0/aK6zXrSlqYN9O42csLgzXz9uM47HwcOA19i4RypQJpnz+S6K/RPJMV/PUI3PFmx1rnYrKptmHYCy3k9UxtdQOR4DQ40MLSUz8puS1GLJem4E/bhOsGK5/QwP54QylZ1OsxfkhSHOJBGgJJvjtsPzgVpEIaLddC2VmzeLc4+2+VqHvhT2IGTSX9RWQZL/O0bSYFChI2yCLYen++Y4Zu4792Xaw34hXmbKsbK+7p3EYJhu6ob85zVQr6eK4W/yJNPTNSjuqVFlSoS8FJHfYhOEt0r6tO/pbVMwDIMZl+gU7z+m6GeuhotDiA5NxIpc53ffu28B+xPAirscPMFgm2w2hnm+MLQM157xRCd/kGxZ0gSPO+RkR8DHxAI=
