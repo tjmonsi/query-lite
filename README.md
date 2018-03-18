@@ -233,3 +233,6 @@ npm run size
 ```
 
 ## Known Issues
+
+1. Not yet tested for Production: https://github.com/tjmonsi/query-lite/issues/1
+2. Not yet tested using Webpack on older browsers https://github.com/tjmonsi/query-lite/issues/2
