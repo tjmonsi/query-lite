@@ -1,6 +1,6 @@
 {
   "name": "@littleq/query-lite",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Query Parameters getter. Parses query parameter into an object. Works with @littleq/location-lite",
   "main": "query-lite",
   "scripts": {
@@ -15,6 +15,10 @@
     "pretest": "npm run build",
     "prepublishOnly": "npm test"
   },
+  "files": [
+    "query-lite.js",
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tjmonsi/query-lite.git"
