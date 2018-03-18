@@ -1,5 +1,15 @@
 /// <reference path="typings-project/global.d.ts"/>
 
+/**
+ * # query-lite
+ * `<query-lite>` Query parameter setter and getter system. Parses query parameter into an object. Works with `@littleq/location-lite`
+ *
+ * This is a copied version of without using Polymer https://github.com/PolymerElements/iron-location/blob/__auto_generated_3.0_preview/iron-query-params.js
+ *
+ * @customElement
+ *
+ */
+
 class QueryLite extends window.HTMLElement {
   static get is () { return 'query-lite'; }
 
@@ -32,9 +42,15 @@ class QueryLite extends window.HTMLElement {
   }
 
   _queryChanged (query) {
+    if (this._dontReactQuery) {
+      return;
+    }
     this._dontReact = true;
     this.queryObject = this.decodeParams(query);
-    this.dispatchEvent(new window.CustomEvent('query-object-change', { detail: this.queryObject }));
+    Promise.resolve().then(() => {
+      this.dispatchEvent(new window.CustomEvent('query-object-change', { detail: this.queryObject }));
+    });
+
     this._dontReact = false;
   }
 
@@ -42,12 +58,17 @@ class QueryLite extends window.HTMLElement {
     if (this._dontReact) {
       return;
     }
+    this._dontReactQuery = true;
     this.query = this.encodeParams(queryObject)
       .replace(/%3F/g, '?')
       .replace(/%2F/g, '/')
       .replace(/'/g, '%27');
 
-    this.dispatchEvent(new window.CustomEvent('query-change', { detail: this.query }));
+    Promise.resolve().then(() => {
+      this.dispatchEvent(new window.CustomEvent('query-change', { detail: this.query }));
+    });
+
+    this._dontReactQuery = false;
   }
 
   encodeParams (params) {
